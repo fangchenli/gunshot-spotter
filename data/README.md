@@ -12,3 +12,9 @@
 8. TWANGnBANG
 9. Colion Noir
 10. DemolitionRanch
+
+## Use youtube-dl to download audio
+
+```shell script
+youtube-dl -x --audio-format wav --audio-quality 0 [url]
+```
