@@ -8,5 +8,7 @@ if __name__ == '__main__':
     creation_time = 0
     while True:
         time.sleep(0.1)
-        if os.stat(WAVE_OUTPUT_FILENAME).st_ctime > creation_time:
+        curr_ctime = os.stat(WAVE_OUTPUT_FILENAME).st_ctime
+        if curr_ctime > creation_time:
             print('file changed.')
+            creation_time = curr_ctime
