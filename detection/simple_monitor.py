@@ -38,9 +38,14 @@ if __name__ == '__main__':
 
             if clf.predict([s]) == 1:
                 print('safe.')
+                print(0)
                 print(y[0, :])
-                print('...')
+                print(1)
                 print(y[1, :])
+                print(6)
+                print(y[6, :])
+                print(7)
+                print(y[7, :])
             else:
                 time3 = time.time()
                 print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
