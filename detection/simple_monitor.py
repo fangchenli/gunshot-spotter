@@ -36,15 +36,17 @@ if __name__ == '__main__':
             s = s.flatten()
             # making shape equal to 880 equal to feature vector length
 
-            diff_length = feature_length - s.shape[0]
+            # diff_length = feature_length - s.shape[0]
             # padding_length_before = diff_length // 2
             # padding_length_after = diff_length - padding_length_before
-            if s.shape[0] < feature_length:
-                # s = np.pad(s, (padding_length_before, padding_length_after), 'constant', constant_values=0)
-                # s = np.concatenate((s, s[s.shape[0] - diff_length:]))
-                s = np.resize(s, feature_length)
-            else:
-                s = s[0:feature_length]
+            # if s.shape[0] < feature_length:
+            #     # s = np.pad(s, (padding_length_before, padding_length_after), 'constant', constant_values=0)
+            #     # s = np.concatenate((s, s[s.shape[0] - diff_length:]))
+            #     s = np.resize(s, feature_length)
+            # else:
+            #     s = s[0:feature_length]
+
+            s = np.resize(s, feature_length)
 
             time2 = time.time()
 
