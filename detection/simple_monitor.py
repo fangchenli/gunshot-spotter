@@ -31,8 +31,10 @@ if __name__ == '__main__':
             # load audio using librosa package
             y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1, mono=False)
 
+            y = np.asfortranarray(y)
+
             # extracting MFCC feature of audio
-            s = librosa.feature.mfcc(y=np.asfortranarray(y[1, :]), sr=sr, hop_length=512, n_mfcc=20)
+            s = librosa.feature.mfcc(y=y[1, :], sr=sr, hop_length=512, n_mfcc=20)
             s = s.flatten()
             s = np.resize(s, feature_length)
 
