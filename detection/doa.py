@@ -43,8 +43,8 @@ def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
 
 
 def get_direction(buf):
-    tau = [0] * MIC_GROUP_N
-    theta = [0] * MIC_GROUP_N
+    tau = np.zeros((MIC_GROUP_N,))
+    theta = np.zeros((MIC_GROUP_N,))
 
     for i, v in enumerate(MIC_GROUP):
         tau[i], _ = gcc_phat(buf[v[0]::8], buf[v[1]::8], fs=RESPEAKER_RATE, max_tau=MAX_TDOA_6P1, interp=1)

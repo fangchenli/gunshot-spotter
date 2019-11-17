@@ -30,15 +30,17 @@ if __name__ == '__main__':
             y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1, mono=False)
 
             # extracting MFCC feature of audio
-            s = librosa.feature.mfcc(y=np.asfortranarray(y[0, :]), sr=sr, hop_length=512, n_mfcc=20)
+            s = librosa.feature.mfcc(y=np.asfortranarray(y[1, :]), sr=sr, hop_length=512, n_mfcc=20)
             s = s.flatten()
             s = np.resize(s, feature_length)
 
             time2 = time.time()
 
-            print(s.shape)
             if clf.predict([s]) == 1:
                 print('safe.')
+                print(y[0, :])
+                print('...')
+                print(y[1, :])
             else:
                 time3 = time.time()
                 print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
