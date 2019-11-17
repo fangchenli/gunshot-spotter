@@ -26,10 +26,12 @@ if __name__ == '__main__':
             time1 = time.time()
 
             # load audio using librosa package
-            y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1)
+            y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1, mono=False)
+
+            print(y.shape)
 
             # extracting MFCC feature of audio
-            s = librosa.feature.mfcc(y=y, sr=sr, hop_length=512, n_mfcc=20)
+            s = librosa.feature.mfcc(y=y[0, :], sr=sr, hop_length=512, n_mfcc=20)
             # s = np.reshape(s, np.product(s.shape))
             s = s.flatten()
             # making shape equal to 880 equal to feature vector length
