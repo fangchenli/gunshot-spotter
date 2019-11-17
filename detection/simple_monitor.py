@@ -31,10 +31,8 @@ if __name__ == '__main__':
             # load audio using librosa package
             y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1, mono=False)
 
-            y = np.asfortranarray(y)
-
             # extracting MFCC feature of audio
-            s = librosa.feature.mfcc(y=y[1, :], sr=sr, hop_length=512, n_mfcc=20)
+            s = librosa.feature.mfcc(y=np.asfortranarray(y[1, :]), sr=sr, hop_length=512, n_mfcc=20)
             s = s.flatten()
             s = np.resize(s, feature_length)
 
@@ -47,17 +45,3 @@ if __name__ == '__main__':
                 print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
                 direction = get_direction(y)
                 print(direction)
-
-                plt.figure()
-                plt.subplot(4, 1, 1)
-                librosa.display.waveplot(y[1, :], sr=sr)
-
-                plt.subplot(4, 1, 2)
-                librosa.display.waveplot(y[2, :], sr=sr)
-
-                plt.subplot(4, 1, 3)
-                librosa.display.waveplot(y[3, :], sr=sr)
-
-                plt.subplot(4, 1, 4)
-                librosa.display.waveplot(y[4, :], sr=sr)
-                plt.show()
