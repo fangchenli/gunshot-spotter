@@ -47,6 +47,7 @@ if __name__ == '__main__':
 
             time2 = time.time()
 
+            print(s.shape)
             if clf.predict([s]) == 1:
                 print('safe.')
             else:
