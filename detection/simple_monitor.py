@@ -28,10 +28,10 @@ if __name__ == '__main__':
             # load audio using librosa package
             y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1)
 
-            print(type(y))
             # extracting MFCC feature of audio
             s = librosa.feature.mfcc(y=y, sr=sr, hop_length=512, n_mfcc=20)
-            s = np.reshape(s, np.product(s.shape))
+            # s = np.reshape(s, np.product(s.shape))
+            s = s.ravel()
             # making shape equal to 880 equal to feature vector length
 
             diff_length = feature_length - s.shape[0]
