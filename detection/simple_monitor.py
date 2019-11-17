@@ -28,7 +28,7 @@ if __name__ == '__main__':
             # load audio using librosa package
             y, sr = librosa.load(WAVE_OUTPUT_FILENAME, duration=1)
 
-            print(y.size())
+            print(type(y))
             # extracting MFCC feature of audio
             s = librosa.feature.mfcc(y=y, sr=sr, hop_length=512, n_mfcc=20)
             s = np.reshape(s, np.product(s.shape))
