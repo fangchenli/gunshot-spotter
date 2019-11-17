@@ -1,12 +1,12 @@
 import os
 import time
 
-WAVE_OUTPUT_FILENAME = "output.wav"
+if __name__ == '__main__':
 
-while True:
+    WAVE_OUTPUT_FILENAME = "output.wav"
 
-    time.sleep(1)
-
-    fileStat = os.stat(WAVE_OUTPUT_FILENAME)
-
-    print(fileStat)
+    creation_time = 0
+    while True:
+        time.sleep(0.1)
+        if os.stat(WAVE_OUTPUT_FILENAME).st_ctime > creation_time:
+            print('file changed.')
