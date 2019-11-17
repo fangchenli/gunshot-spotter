@@ -7,7 +7,7 @@ RESPEAKER_WIDTH = 2
 # run getDeviceInfo.py to get index
 RESPEAKER_INDEX = 2  # refer to input device id
 CHUNK = 1024
-RECORD_SECONDS = 5
+RECORD_SECONDS = 1
 WAVE_OUTPUT_FILENAME = "output.wav"
 
 
