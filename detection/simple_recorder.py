@@ -10,9 +10,10 @@ CHUNK = 1024
 RECORD_SECONDS = 5
 WAVE_OUTPUT_FILENAME = "output.wav"
 
-p = pyaudio.PyAudio()
 
 while True:
+
+    p = pyaudio.PyAudio()
 
     stream = p.open(
         rate=RESPEAKER_RATE,
@@ -35,9 +36,13 @@ while True:
     stream.close()
     p.terminate()
 
+    print('test1')
+
     wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
     wf.setnchannels(RESPEAKER_CHANNELS)
     wf.setsampwidth(p.get_sample_size(p.get_format_from_width(RESPEAKER_WIDTH)))
     wf.setframerate(RESPEAKER_RATE)
     wf.writeframes(b''.join(frames))
     wf.close()
+
+    print('test2')
