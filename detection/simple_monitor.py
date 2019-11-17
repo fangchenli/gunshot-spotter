@@ -41,7 +41,8 @@ if __name__ == '__main__':
             # padding_length_after = diff_length - padding_length_before
             if s.shape[0] < feature_length:
                 # s = np.pad(s, (padding_length_before, padding_length_after), 'constant', constant_values=0)
-                s = np.concatenate((s, s[s.shape[0] - diff_length:]))
+                # s = np.concatenate((s, s[s.shape[0] - diff_length:]))
+                s = np.resize(feature_length)
             else:
                 s = s[0:feature_length]
 
