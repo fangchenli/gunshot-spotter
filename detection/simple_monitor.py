@@ -4,7 +4,7 @@ import pickle
 
 import numpy as np
 import librosa
-from .doa import get_direction
+from doa import get_direction
 
 if __name__ == '__main__':
 
