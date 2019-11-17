@@ -3,7 +3,9 @@ import time
 import pickle
 
 import numpy as np
+import matplotlib.pyplot as plt
 import librosa
+import librosa.display
 from doa import get_direction
 
 if __name__ == '__main__':
@@ -38,16 +40,22 @@ if __name__ == '__main__':
 
             if clf.predict([s]) == 1:
                 print('safe.')
-                print(0)
-                print(y[0, :])
-                print(1)
-                print(y[1, :])
-                print(6)
-                print(y[6, :])
-                print(7)
-                print(y[7, :])
             else:
                 time3 = time.time()
                 print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
                 direction = get_direction(y)
                 print(direction)
+
+                plt.figure()
+                plt.subplot(4, 1, 1)
+                librosa.display.waveplot(y[1, :], sr=sr)
+
+                plt.subplot(4, 1, 2)
+                librosa.display.waveplot(y[2, :], sr=sr)
+
+                plt.subplot(4, 1, 3)
+                librosa.display.waveplot(y[3, :], sr=sr)
+
+                plt.subplot(4, 1, 4)
+                librosa.display.waveplot(y[4, :], sr=sr)
+                plt.show()
