@@ -16,7 +16,7 @@ import librosa
 
 import sys
 
-sys.path.append("..")
+sys.path.append(".")
 
 from ..detection.doa import get_direction
 
