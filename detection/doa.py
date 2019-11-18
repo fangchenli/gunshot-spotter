@@ -43,9 +43,12 @@ def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
 
 
 def get_direction(buf):
-    max_index = np.argmax(buf, axis = 1)
-    print(buf.shape)
-    print(max_index)
+    max_value = np.max(buf)
+    print("max value is " + max_value)
+
+    max_index = np.argmax(buf) % buf.shape[1]
+    print(max_index + " " + buf[:, max_index])
+    
     if max_index < 1000:
         print("max < 1000")
         buf = buf[:, 0: max_index + 1000]
