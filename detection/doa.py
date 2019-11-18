@@ -44,24 +44,13 @@ def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
 
 def get_direction(buf):
     max_value = np.max(buf)
-    print("max value is ",max_value)
-
     max_index = np.argmax(buf) % buf.shape[1]
-    print(max_index)
-    print(buf[:, max_index])
-
     if max_index < 1000:
-        print("max < 1000")
         buf = buf[:, 0: max_index + 1000]
-        print(buf.shape)
     elif max_index > buf.shape[1] - 1000:
         buf = buf[:, max_index - 1000: buf.shape[1]-1]
-        print("max_index > buf.shape[1] - 1")
-        print(buf.shape)
-    else:
+   else:
         buf = buf[:, max_index-1000: max_index + 1000]
-        print("zhengchang")
-        print(buf.shape)
     
     tau = np.zeros((MIC_GROUP_N,))
     theta = np.zeros((MIC_GROUP_N,))
