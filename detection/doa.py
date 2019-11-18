@@ -48,10 +48,10 @@ def get_direction(buf):
     if max_index < 1000:
         buf = buf[:, 0: max_index + 1000]
     elif max_index > buf.shape[1] - 1000:
-        buf = buf[:, max_index - 1000: buf.shape[1]-1]
-   else:
-        buf = buf[:, max_index-1000: max_index + 1000]
-    
+        buf = buf[:, max_index - 1000: buf.shape[1] - 1]
+    else:
+        buf = buf[:, max_index - 1000: max_index + 1000]
+
     tau = np.zeros((MIC_GROUP_N,))
     theta = np.zeros((MIC_GROUP_N,))
 
