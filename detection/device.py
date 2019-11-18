@@ -14,11 +14,7 @@ from AWSIoTPythonSDK.exception.AWSIoTExceptions import DiscoveryInvalidRequestEx
 import numpy as np
 import librosa
 
-import sys
-
-sys.path.append(".")
-
-from ..detection.doa import get_direction
+from detection.doa import get_direction
 
 
 # Custom Shadow callback for updating the desired state in the shadow
