@@ -138,7 +138,7 @@ GGC_ADDR_NAME = "ggc-host"  # stores GGC host address
 host = 'a1nspdoka830y9-ats.iot.us-west-2.amazonaws.com'
 iotCAPath = 'root.ca.pem'
 certificatePath = 'pi01.cert.pem'
-privateKeyPath = 'pi01.private.pem'
+privateKeyPath = 'pi01.private.key'
 thingName = 'PI_01'
 clientId = 'PI_01'
 
