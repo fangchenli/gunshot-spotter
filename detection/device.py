@@ -214,15 +214,14 @@ while True:
 
         time2 = time.time()
 
-        payload = {'timestamp': time1}
         if clf.predict([s]) == 1:
             print('safe.')
         else:
             time3 = time.time()
             print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
             direction = get_direction(y)
-            print(direction)
+            print(f'from direction: {direction}')
 
-            payload = {'state': {'reported': {'safety': 'shot'}}}
+            payload = {'state': {'reported': {'gunshot': 'yes', 'direction': direction, 'timestamp': time1}}}
 
             deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
