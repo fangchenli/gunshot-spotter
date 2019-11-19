@@ -182,8 +182,9 @@ myAWSIoTMQTTShadowClient.connect()
 # Create a deviceShadow with persistent subscription
 deviceShadowHandler = myAWSIoTMQTTShadowClient.createShadowHandlerWithName(thingName, True)
 
-payload = {'state': {'desired': {'safety': 'shot'}}}
-deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
+# payload = {'state': {'desired': {'safety': 'shot'}}}
+JSONPayload = '{"state":{"desired":{"property":' + '"' + 'WoW' + '"}}}'
+deviceShadowHandler.shadowUpdate(JSONPayload, customShadowCallback_Update, 5)
 
 # model_name = "save_training_2.pickle"
 # WAVE_OUTPUT_FILENAME = "output.wav"
