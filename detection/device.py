@@ -226,7 +226,7 @@ while True:
             payload = {'state': {'reported': {'gunshot': 'yes',
                                               'direction': direction,
                                               'timestamp': creation_time,
-                                              'amplitude': max_amp,
-                                              'index': max_index}}}
+                                              'amplitude': str(max_amp),
+                                              'index': str(max_index)}}}
 
         deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
