@@ -183,7 +183,7 @@ myAWSIoTMQTTShadowClient.connect()
 deviceShadowHandler = myAWSIoTMQTTShadowClient.createShadowHandlerWithName(thingName, True)
 
 # payload = {'state': {'desired': {'safety': 'shot'}}}
-JSONPayload = '{"state":{"reported":{"property":' + '"' + 'WoW' + '"}}}'
+JSONPayload = '{"state":{"desired":{"property":' + '"' + 'WoW' + '"}}}'
 deviceShadowHandler.shadowUpdate(JSONPayload, customShadowCallback_Update, 5)
 
 # model_name = "save_training_2.pickle"
