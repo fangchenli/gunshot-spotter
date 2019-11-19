@@ -182,10 +182,6 @@ myAWSIoTMQTTShadowClient.connect()
 # Create a deviceShadow with persistent subscription
 deviceShadowHandler = myAWSIoTMQTTShadowClient.createShadowHandlerWithName(thingName, True)
 
-# # payload = {'state': {'desired': {'safety': 'shot'}}}
-# JSONPayload = '{"state":{"reported":{"property":' + '"' + 'WoW' + '"}}}'
-# deviceShadowHandler.shadowUpdate(JSONPayload, customShadowCallback_Update, 5)
-
 model_name = "save_training_2.pickle"
 WAVE_OUTPUT_FILENAME = "output.wav"
 feature_length = 880
@@ -212,16 +208,25 @@ while True:
         s = s.flatten()
         s = np.resize(s, feature_length)
 
+        max_amp = np.max(y[1, :])
+
+        max_index = np.argmax(y[1, :])
+
         time2 = time.time()
 
         if clf.predict([s]) == 1:
             print('safe.')
+            payload = {'state': {'reported': {'gunshot': 'no', 'timestamp': creation_time}}}
         else:
             time3 = time.time()
             print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
             direction = get_direction(y)
             print(f'from direction: {direction}')
 
-            payload = {'state': {'reported': {'gunshot': 'yes', 'direction': direction, 'timestamp': time1}}}
+            payload = {'state': {'reported': {'gunshot': 'yes',
+                                              'direction': direction,
+                                              'timestamp': creation_time,
+                                              'amplitude': max_amp,
+                                              'index': max_index}}}
 
-            deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
+        deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
