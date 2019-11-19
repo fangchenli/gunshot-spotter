@@ -223,4 +223,4 @@ while True:
             payload['state'] = 'gunshot'
             payload['direction'] = direction
 
-            deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
+        deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
