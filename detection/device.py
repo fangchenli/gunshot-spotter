@@ -227,6 +227,7 @@ while True:
                                               'direction': direction,
                                               'timestamp': creation_time,
                                               'amplitude': str(max_amp),
-                                              'index': str(max_index)}}}
+                                              'index': str(max_index),
+                                              'alert': 'Shots Fired! Run!'}}}
 
         deviceShadowHandler.shadowUpdate(json.dumps(payload), customShadowCallback_Update, 5)
