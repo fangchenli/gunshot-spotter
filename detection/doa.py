@@ -1,10 +1,9 @@
-import math
 import numpy as np
 
 SOUND_SPEED = 343.2
 
-MIC_DISTANCE_6P1 = 0.09218
-MAX_TDOA_6P1 = MIC_DISTANCE_6P1 / float(SOUND_SPEED)
+MIC_DISTANCE_6 = 0.09218
+MAX_TDOA_6 = MIC_DISTANCE_6 / float(SOUND_SPEED)
 
 RESPEAKER_RATE = 16000
 
@@ -12,7 +11,7 @@ MIC_GROUP_N = 3
 MIC_GROUP = [[0, 3], [1, 4], [2, 5]]
 
 
-def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
+def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=1):
     """
     This function computes the offset between the signal sig and the reference signal refsig
     using the Generalized Cross Correlation - Phase Transform (GCC-PHAT)method.
@@ -45,19 +44,22 @@ def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
 def get_direction(buf):
     max_value = np.max(buf)
     max_index = np.argmax(buf) % buf.shape[1]
-    if max_index < 1000:
-        buf = buf[:, 0: max_index + 1000]
-    elif max_index > buf.shape[1] - 1000:
-        buf = buf[:, max_index - 1000: buf.shape[1] - 1]
+
+    radius = 500
+
+    if max_index < radius:
+        buf = buf[:, 0: max_index + radius]
+    elif max_index > buf.shape[1] - radius:
+        buf = buf[:, max_index - radius:]
     else:
-        buf = buf[:, max_index - 1000: max_index + 1000]
+        buf = buf[:, max_index - radius: max_index + radius]
 
     tau = np.zeros((MIC_GROUP_N,))
     theta = np.zeros((MIC_GROUP_N,))
 
     for i, v in enumerate(MIC_GROUP):
-        tau[i], _ = gcc_phat(buf[v[0], :], buf[v[1], :], fs=RESPEAKER_RATE, max_tau=MAX_TDOA_6P1, interp=1)
-        theta[i] = np.arcsin(tau[i] / MAX_TDOA_6P1) * 180 / np.pi
+        tau[i], _ = gcc_phat(buf[v[0], :], buf[v[1], :], fs=RESPEAKER_RATE, max_tau=MAX_TDOA_6, interp=1)
+        theta[i] = np.arcsin(tau[i] / MAX_TDOA_6) * 180 / np.pi
 
     min_index = np.argmin(np.abs(tau))
     if (min_index != 0 and theta[min_index - 1] >= 0) or (min_index == 0 and theta[MIC_GROUP_N - 1] < 0):

@@ -220,7 +220,7 @@ while True:
         else:
             time3 = time.time()
             print(f'gunshot detected. time: {creation_time}. loading: {time2 - time1}. inference: {time3 - time2}')
-            direction = get_direction(y)
+            direction = get_direction(y[:5])
             print(f'from direction: {direction}')
 
             payload = {'state': {'reported': {'gunshot': 'yes',
