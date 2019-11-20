@@ -3,7 +3,7 @@ import numpy as np
 
 SOUND_SPEED = 343.2
 
-MIC_DISTANCE_6P1 = 0.064
+MIC_DISTANCE_6P1 = 0.09218
 MAX_TDOA_6P1 = MIC_DISTANCE_6P1 / float(SOUND_SPEED)
 
 RESPEAKER_RATE = 16000
@@ -57,7 +57,7 @@ def get_direction(buf):
 
     for i, v in enumerate(MIC_GROUP):
         tau[i], _ = gcc_phat(buf[v[0], :], buf[v[1], :], fs=RESPEAKER_RATE, max_tau=MAX_TDOA_6P1, interp=1)
-        theta[i] = math.asin(tau[i] / MAX_TDOA_6P1) * 180 / math.pi
+        theta[i] = np.arcsin(tau[i] / MAX_TDOA_6P1) * 180 / np.pi
 
     min_index = np.argmin(np.abs(tau))
     if (min_index != 0 and theta[min_index - 1] >= 0) or (min_index == 0 and theta[MIC_GROUP_N - 1] < 0):
@@ -65,6 +65,6 @@ def get_direction(buf):
     else:
         best_guess = (180 - theta[min_index])
 
-    best_guess = (best_guess + 120 + min_index * 60) % 360
+    best_guess = (best_guess + 30 + min_index * 60) % 360
 
     return best_guess
