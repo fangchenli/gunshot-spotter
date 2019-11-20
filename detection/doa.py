@@ -9,7 +9,7 @@ MAX_TDOA_6P1 = MIC_DISTANCE_6P1 / float(SOUND_SPEED)
 RESPEAKER_RATE = 16000
 
 MIC_GROUP_N = 3
-MIC_GROUP = [[1, 4], [2, 5], [3, 6]]
+MIC_GROUP = [[0, 3], [1, 4], [2, 5]]
 
 
 def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=16):
