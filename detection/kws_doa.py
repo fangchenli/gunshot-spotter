@@ -5,6 +5,9 @@ Hardware: ReSpeaker 6 Mic Array for Raspberry Pi
 """
 
 import sys
+
+sys.path.insert(1, '/home/pi/gunshot-spotter/')
+
 import time
 from voice_engine.pyaudio_source import Source
 from voice_engine.channel_picker import ChannelPicker
@@ -15,7 +18,7 @@ from voice_engine.doa_respeaker_v2_6mic_array import DOA
 def main():
     src = Source(rate=16000, channels=8)
     ch0 = ChannelPicker(channels=src.channels, pick=0)
-    kws = KWS(model='help', sensitivity=0.6, verbose=True)
+    kws = KWS(model='help', sensitivity=0.6, verbose=False)
     doa = DOA(rate=16000)
 
     src.link(ch0)
