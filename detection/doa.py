@@ -3,7 +3,7 @@ import numpy as np
 SOUND_SPEED = 343.2
 
 MIC_DISTANCE_6 = 0.09218
-MAX_TDOA_6 = MIC_DISTANCE_6 / float(SOUND_SPEED)
+MAX_TDOA_6 = MIC_DISTANCE_6 / SOUND_SPEED
 
 RESPEAKER_RATE = 16000
 
@@ -42,18 +42,16 @@ def gcc_phat(sig, refsig, fs=1, max_tau=None, interp=1):
 
 
 def get_direction(buf):
-    max_value = np.max(buf)
-    max_index = np.argmax(buf) % buf.shape[1]
 
-    radius = 500
+    max_indexes = np.argmax(buf, axis=1)
+    max_index = np.amax(max_indexes)
+    min_index = np.amin(max_indexes)
+    dif = max_index - min_index
 
-    if max_index < radius:
-        buf = buf[:, 0: max_index + radius]
-    elif max_index > buf.shape[1] - radius:
-        buf = buf[:, max_index - radius:]
-    else:
-        buf = buf[:, max_index - radius: max_index + radius]
+    buf = buf[:, np.amax([0, min_index-dif]):np.amin([buf.shape[1], max_index+dif])]
 
+    print(f'max index: {max_index}')
+    print(f'peek diff: {dif}')
     tau = np.zeros((MIC_GROUP_N,))
     theta = np.zeros((MIC_GROUP_N,))
 
