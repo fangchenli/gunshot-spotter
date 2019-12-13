@@ -4,7 +4,7 @@ import apiclient
 
 
 channel_name = 'hickok45'
-api_key = 'AIzaSyBfIXBRlvWmnmOCJoiqgBDZICRnOEuhbK8'
+api_key = 'api_key'
 year_bound = 2
 curr_year = datetime.now().year
 
